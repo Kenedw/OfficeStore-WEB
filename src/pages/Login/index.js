@@ -1,14 +1,11 @@
+import { Input } from '@rocketseat/unform';
 import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
-import { Container, Login, TextLine, MyForm } from './styles';
+import { Container, Login, MyForm, TextLine } from './styles';
 
 const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Email incorreto')
-    .required('Campo obrigatorio'),
-  cnpj: Yup.string().required('Campo obrigatorio'),
+  login: Yup.string().required('Campo obrigatorio'),
   password: Yup.string()
     .min(4)
     .required('Campo obrigatorio'),
@@ -25,8 +22,11 @@ export default function App() {
           <div className="login-title">Login</div>
         </TextLine>
         <MyForm schema={schema} onSubmit={handleSubmit}>
-          <Input name="email" placeholder="exemplo@email.com" label="e-mail" />
-          <Input name="cnpj" label="cnpj" placeholder="•••••••••••••" />
+          <Input
+            name="login"
+            placeholder="exemplo@email.com/•••••••••••••"
+            label="e-mail / cnpj"
+          />
           <Input
             name="password"
             type="current-password"
