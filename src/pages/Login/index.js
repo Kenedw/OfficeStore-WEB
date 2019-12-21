@@ -13,9 +13,7 @@ const schema = Yup.object().shape({
 });
 
 export default function App() {
-  function handleSubmit() {
-    e.preventDefault();
-  }
+  function handleSubmit() {}
 
   return (
     <Container>
