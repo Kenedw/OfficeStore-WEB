@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Card = styled.div`
+export const Login = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,7 +81,7 @@ export const MyForm = styled(Form)`
   }
 
   button {
-    margin: 5px 0 0;
+    margin: 15px 0 0;
     height: 35px;
     font-weight: bold;
     background: #ff5125;
@@ -92,17 +92,6 @@ export const MyForm = styled(Form)`
     transition: background 0.2s;
     &:hover {
       background: ${darken(0.06, '#ff5125')};
-    }
-  }
-
-  button:last-child {
-    background-color: #d3d3d3;
-    transition: background 0.2s;
-    &:hover {
-      background: ${darken(0.06, '#d3d3d3')};
-    }
-    a {
-      color: #3d3d3d;
     }
   }
 `;

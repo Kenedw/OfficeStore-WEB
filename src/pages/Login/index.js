@@ -1,8 +1,9 @@
 import { Input } from '@rocketseat/unform';
 import React from 'react';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
-import { Container, Login, MyForm, TextLine } from './styles';
+import { Container, Card, MyForm, TextLine } from './styles';
 
 const schema = Yup.object().shape({
   login: Yup.string().required('Campo obrigatorio'),
@@ -12,12 +13,14 @@ const schema = Yup.object().shape({
 });
 
 export default function App() {
-  function handleSubmit() {}
+  function handleSubmit() {
+    e.preventDefault();
+  }
 
   return (
     <Container>
       <span>Bem-vindo. Conecte-se com a melhor loja para empreendedores</span>
-      <Login>
+      <Card>
         <TextLine>
           <div className="login-title">Login</div>
         </TextLine>
@@ -38,9 +41,11 @@ export default function App() {
           <TextLine>
             <div>Novo no Office Store?</div>
           </TextLine>
-          <button type="submit">Crie sua conta</button>
+          <button type="button">
+            <Link to="/signup">Crie sua conta</Link>
+          </button>
         </MyForm>
-      </Login>
+      </Card>
     </Container>
   );
 }
