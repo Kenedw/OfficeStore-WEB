@@ -28,7 +28,7 @@ const schema = Yup.object().shape({
 
 export default function App() {
   const [isSignup, setSignup] = useState(false);
-  let history = useHistory();
+  const history = useHistory();
 
   async function handleSubmit({ confirmPassword, ...data }) {
     setSignup(true);

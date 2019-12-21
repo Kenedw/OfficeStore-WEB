@@ -64,10 +64,10 @@ export const MyForm = styled(Form)`
     margin: 15px 0 5px 0;
   }
 
-  span {
+  > span {
     margin: 0;
     font-size: 12px;
-    color: #c3c3c3;
+    color: #f64c75;
   }
 
   input {
