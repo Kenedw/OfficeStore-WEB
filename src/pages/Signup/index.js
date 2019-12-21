@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import { Input } from '@rocketseat/unform';
 
-import api from '../../services/api';
-import Loading from '../../components/Loading';
+import api from '~/services/api';
+import Loading from '~/components/Loading';
 
 import { Container, Login, MyForm, TextLine } from './styles';
 
