@@ -11,13 +11,14 @@ export default createGlobalStyle`
   }
 
   body, input, button{
+    background-color: #fbfbfb;
     font: 14px Roboto, sans-serif;
   }
 
   #root {
     /* max-width: 1020px; */
     margin: 0 auto;
-    /* padding: 0 20px 50px; */
+    padding: 0 20px 50px;
   }
 
   button {
