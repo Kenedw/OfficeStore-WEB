@@ -2,12 +2,14 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
   entry: [path.join(__dirname, 'src', 'index.js')],
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'index.js',
+    filename: '[name].index.js',
+    sourceMapFilename: '[name].map',
   },
   mode: process.env.NODE_ENV || 'development',
   resolve: {
@@ -31,6 +33,10 @@ module.exports = {
         test: /\.(jpg|jpeg|png|gif|svg)$/,
         loaders: ['file-loader'],
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [
@@ -38,5 +44,6 @@ module.exports = {
       template: path.join(__dirname, 'public', 'index.html'),
     }),
     new Dotenv(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };

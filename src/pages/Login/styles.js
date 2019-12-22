@@ -67,7 +67,7 @@ export const MyForm = styled(Form)`
   > span {
     margin: 0;
     font-size: 12px;
-    color: #f64c75;
+    color: #4d4d4d;
   }
 
   input {

@@ -24,5 +24,6 @@ export const Container = styled.div`
   > span {
     font-size: 14px;
     font-weight: 500;
+    color: #4d4d4d;
   }
 `;

@@ -8,7 +8,7 @@ import { Container, Card, MyForm, TextLine } from './styles';
 const schema = Yup.object().shape({
   login: Yup.string().required('Campo obrigatorio'),
   password: Yup.string()
-    .min(4)
+    .min(3)
     .required('Campo obrigatorio'),
 });
 
@@ -26,11 +26,13 @@ export default function App() {
           <Input
             name="login"
             placeholder="exemplo@email.com/•••••••••••••"
+            autoComplete="username"
             label="e-mail / cnpj"
           />
           <Input
             name="password"
-            type="current-password"
+            type="password"
+            autoComplete="current-password"
             placeholder="•••••••••••"
             label="senha"
           />

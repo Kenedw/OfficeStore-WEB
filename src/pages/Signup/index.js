@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
 import { Input } from '@rocketseat/unform';
+import { useDispatch, useSelector } from 'react-redux';
 
-import api from '~/services/api';
 import Loading from '~/components/Loading';
-
 import { Container, Login, MyForm, TextLine } from './styles';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Campo obrigatorio'),
@@ -27,25 +26,11 @@ const schema = Yup.object().shape({
 });
 
 export default function App() {
-  const [isSignup, setSignup] = useState(false);
-  const history = useHistory();
+  const isSignup = useSelector(state => state.auth.loading);
+  const dispatch = useDispatch();
 
-  async function handleSubmit({ confirmPassword, ...data }) {
-    setSignup(true);
-
-    try {
-      const response = await api.post('user', data);
-      if (response.status === 200) {
-        alert('Cadastro realizado com sucesso');
-        setSignup(false);
-        history.push('/');
-      }
-    } catch (e) {
-      console.error(e);
-      alert('Falha ao realizar cadatro, confira seus dados e tente novamente');
-    } finally {
-      setSignup(false);
-    }
+  function handleSubmit({ confirmPassword, ...data }) {
+    dispatch(signUpRequest(data)); // login and password
   }
 
   return (
@@ -58,7 +43,7 @@ export default function App() {
         <TextLine>
           <div className="login-title">Cadastro</div>
         </TextLine>
-        <MyForm schema={schema} onSubmit={data => handleSubmit(data)}>
+        <MyForm schema={schema} onSubmit={handleSubmit}>
           {isSignup ? (
             <Loading />
           ) : (
