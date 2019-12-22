@@ -13,11 +13,10 @@ export default function RouteWrapper({
   const { signed } = store.getState().auth;
 
   if (!signed && isPrivate) {
-    return <Redirect to="/" />;
-  }
-
-  if (signed && !isPrivate) {
     return <Redirect to="/signup" />;
+  }
+  if (signed && rest.path === '/') {
+    return <Redirect to="myCatalog" />;
   }
 
   return <Route {...rest} render={props => <Component {...props} />} />;

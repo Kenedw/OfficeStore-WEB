@@ -24,8 +24,14 @@ export default function Header() {
       </Link>
       {isAuth && (
         <SignOut type="button" onClick={handleSignOut}>
-          <GoSignOut />
-          SignOut
+          <img
+            src="https://api.adorable.io/avatars/50/abott@adorable.png"
+            alt="avatar"
+          />
+          <div>
+            <GoSignOut />
+            SignOut
+          </div>
         </SignOut>
       )}
     </Container>
