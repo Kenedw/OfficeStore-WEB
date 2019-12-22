@@ -50,7 +50,6 @@ export default function MyModal({ isOpen, setIsOpen, item }) {
 
   async function handleDeleteItem() {
     const { id: itemId } = item;
-    console.log(item);
     try {
       const response = api.delete(`item/${itemId}`);
       if (response.status === 200) {

@@ -19,7 +19,6 @@ export default function MyCatalog() {
 
   useEffect(() => {
     async function loadItems() {
-      console.log(params);
       try {
         const response = await api.get('item', {
           params,
