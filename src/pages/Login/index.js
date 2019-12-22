@@ -34,7 +34,7 @@ export default function App() {
     if (isNaN(login)) {
       data.email = login;
     } else {
-      data.cnpj = login;
+      data.cnpj = login.toString();
     }
 
     dispatch(signInRequest(data));

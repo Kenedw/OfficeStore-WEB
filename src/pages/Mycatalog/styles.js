@@ -1,17 +1,11 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const ProductList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
   list-style: none;
-
-  @media (max-width: 630px) {
-    grid-template-columns: repeat(2, 1fr);
-    img {
-      width: 20vh;
-    }
-  }
+  justify-items: center;
 
   button {
     border: 0;
@@ -25,6 +19,7 @@ export const ProductList = styled.ul`
     border-radius: 4px;
     border: 1px solid #d3d3d3;
     padding: 20px;
+    object-fit: cover;
 
     img {
       align-self: center;

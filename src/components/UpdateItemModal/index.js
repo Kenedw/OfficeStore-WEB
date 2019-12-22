@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
-import { MyForm } from './styles';
+import { MyForm, Card, Button } from './styles';
 import api from '~/services/api';
 
 const customStyles = {
@@ -38,7 +38,6 @@ export default function MyModal({ isOpen, setIsOpen, item }) {
       const response = await api.put(`item/${data.id}`, data);
 
       if (response.status === 200) {
-        console.log('sucess');
         await toast.done(`Sucesso ao atualizar o item ${data.id}`);
       }
     } catch (err) {
@@ -48,8 +47,24 @@ export default function MyModal({ isOpen, setIsOpen, item }) {
       closeModal();
     }
   }
+
+  async function handleDeleteItem() {
+    const { id: itemId } = item;
+    console.log(item);
+    try {
+      const response = api.delete(`item/${itemId}`);
+      if (response.status === 200) {
+        await toast.done(`Sucesso ao deletar o item ${itemId}`);
+      }
+    } catch (err) {
+      console.error(err);
+      await toast.error('Error ao tentar deletar o item');
+    } finally {
+      closeModal();
+    }
+  }
   return (
-    <div>
+    <Card>
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
@@ -70,10 +85,15 @@ export default function MyModal({ isOpen, setIsOpen, item }) {
             label="valor"
             placeholder={item.value}
           />
-          <button type="submit">Confirmar</button>
+          <Button>
+            <button type="button" onClick={handleDeleteItem}>
+              Excluit item
+            </button>
+            <button type="submit">Confirmar</button>
+          </Button>
         </MyForm>
       </Modal>
-    </div>
+    </Card>
   );
 }
 
