@@ -1,19 +1,44 @@
+/* eslint-disable no-restricted-globals */
 import { Input } from '@rocketseat/unform';
 import React from 'react';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Container, Card, MyForm, TextLine } from './styles';
+import Loading from '~/components/Loading';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
-  login: Yup.string().required('Campo obrigatorio'),
+  login: Yup.lazy(value => {
+    return !isNaN(value)
+      ? Yup.number()
+          .min(14)
+          .required('Campo obrigatorio')
+      : Yup.string()
+          .email('Entre com um email valido')
+          .required('Campo obrigatorio');
+  }),
   password: Yup.string()
     .min(3)
     .required('Campo obrigatorio'),
 });
 
 export default function App() {
-  function handleSubmit() {}
+  const isLoading = useSelector(state => state.auth.loading);
+  const dispatch = useDispatch();
+
+  function handleSubmit({ login, password }) {
+    const data = { password };
+
+    if (isNaN(login)) {
+      data.email = login;
+    } else {
+      data.cnpj = login;
+    }
+
+    dispatch(signInRequest(data));
+  }
 
   return (
     <Container>
@@ -23,27 +48,33 @@ export default function App() {
           <div className="login-title">Login</div>
         </TextLine>
         <MyForm schema={schema} onSubmit={handleSubmit}>
-          <Input
-            name="login"
-            placeholder="exemplo@email.com/•••••••••••••"
-            autoComplete="username"
-            label="e-mail / cnpj"
-          />
-          <Input
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="•••••••••••"
-            label="senha"
-          />
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <>
+              <Input
+                name="login"
+                placeholder="exemplo@email.com/•••••••••••••"
+                autoComplete="username"
+                label="e-mail / cnpj"
+              />
+              <Input
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                placeholder="•••••••••••"
+                label="senha"
+              />
 
-          <button type="submit">Login</button>
-          <TextLine>
-            <div>Novo no Office Store?</div>
-          </TextLine>
-          <button type="button">
-            <Link to="/signup">Crie sua conta</Link>
-          </button>
+              <button type="submit">Login</button>
+              <TextLine>
+                <div>Novo no Office Store?</div>
+              </TextLine>
+              <button type="button">
+                <Link to="/signup">Crie sua conta</Link>
+              </button>
+            </>
+          )}
         </MyForm>
       </Card>
     </Container>
