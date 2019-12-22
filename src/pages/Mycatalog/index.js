@@ -5,9 +5,12 @@ import { ProductList } from './styles';
 
 import itemImg from '~/assets/imgs/item.png';
 import api from '~/services/api';
+import ItemModal from '~/components/UpdateItemModal';
 
 export default function MyCatalog() {
+  const [itemModal, setItemModal] = useState({ any: null });
   const [items, setItems] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const page = 1;
 
@@ -17,8 +20,6 @@ export default function MyCatalog() {
         const response = await api.get('item', {
           params: { page },
         });
-
-        console.log(response);
 
         if (response.status !== 200) {
           throw Error;
@@ -38,17 +39,27 @@ export default function MyCatalog() {
 
   return (
     <ProductList>
+      <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} item={itemModal} />
       {items.map((item, key) => (
-        <li key={key.toString}>
-          <img src={itemImg} alt={item.name} />
-          <strong>{item.name}</strong>
-          <span>
-            {item.value.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
-          </span>
-        </li>
+        <button
+          type="button"
+          key={key.toString}
+          onClick={() => {
+            setItemModal(item);
+            setIsOpen(true);
+          }}
+        >
+          <li>
+            <img src={itemImg} alt={item.name} />
+            <strong>{item.name}</strong>
+            <span>
+              {item.value.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </span>
+          </li>
+        </button>
       ))}
     </ProductList>
   );

@@ -13,8 +13,12 @@ export const ProductList = styled.ul`
     }
   }
 
+  button {
+    border: 0;
+    max-width: 212px;
+  }
+
   li {
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     background: #fff;
