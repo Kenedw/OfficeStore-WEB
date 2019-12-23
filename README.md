@@ -86,6 +86,6 @@ Os parâmetros de ambiente devem ser criados, em um arquivo `.env`, seque no rep
 
 ## Executando
 Por fim, para rodar a aplicação você deve rodar o seguinte comando:
-## ``$ yarn dev`` ou ``$ npm run dev``
+ ``$ yarn dev`` ou ``$ npm run dev``
 
 *Você pode fazer login com os dados email: `first@email.com` ou cnpj: `12345678912345` e senha: `123456`.*
