@@ -6,7 +6,6 @@ export const MyForm = styled(Form)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 30px;
   font-family: 'Roboto', sans-serif;
   width: 40vh;
 

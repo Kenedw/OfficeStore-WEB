@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const ProductList = styled.ul`
   display: grid;
@@ -37,6 +38,26 @@ export const ProductList = styled.ul`
       font-size: 20px;
       font-weight: bold;
       margin: 5px 0;
+    }
+  }
+`;
+
+export const ToolsBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  > button {
+    font-weight: 600;
+    padding: 6px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #d3d3d3;
+    color: #ff5125;
+    transition: background 0.2s;
+    &:hover {
+      background: ${darken(0.06, '#d3d3d3')};
     }
   }
 `;

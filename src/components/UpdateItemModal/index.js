@@ -13,7 +13,6 @@ const customStyles = {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
 };
@@ -22,7 +21,7 @@ Modal.setAppElement('#root');
 
 export default function MyModal({ isOpen, setIsOpen, item }) {
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen('');
   }
 
   async function handleSubmit({ name, value }) {
@@ -65,7 +64,7 @@ export default function MyModal({ isOpen, setIsOpen, item }) {
   return (
     <Card>
       <Modal
-        isOpen={isOpen}
+        isOpen={isOpen === 'update'}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
@@ -99,5 +98,5 @@ export default function MyModal({ isOpen, setIsOpen, item }) {
 MyModal.propTypes = {
   item: PropTypes.oneOfType([PropTypes.element, PropTypes.object]).isRequired,
   setIsOpen: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.string.isRequired,
 };

@@ -3,17 +3,18 @@ import { toast } from 'react-toastify';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import api from '~/services/api';
-import ItemModal from '~/components/UpdateItemModal';
+import UpdateItemModal from '~/components/UpdateItemModal';
+import CreateItemModal from '~/components/CreateItemModal';
 import SearchBar from '~/components/SearchBar';
 
-import { ProductList } from './styles';
+import { ProductList, ToolsBar } from './styles';
 
 import itemImg from '~/assets/imgs/item.png';
 
 export default function MyCatalog() {
   const [itemModal, setItemModal] = useState({ any: null });
   const [items, setItems] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState('');
   const [params, setParams] = useState({ page: 1 });
   const [dispatch, setDispatch] = useState(1);
 
@@ -50,17 +51,28 @@ export default function MyCatalog() {
 
   return (
     <>
-      <SearchBar setParams={setParams} setDispatch={setDispatch} />
+      <ToolsBar>
+        <SearchBar setParams={setParams} setDispatch={setDispatch} />
+        <button
+          type="button"
+          onClick={() => {
+            setIsOpen('create');
+          }}
+        >
+          Add novo Item
+        </button>
+      </ToolsBar>
+      <CreateItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <UpdateItemModal isOpen={isOpen} setIsOpen={setIsOpen} item={itemModal} />
       <InfiniteScroll dataLength={items.length} next={handleMoreData} hasMore>
         <ProductList>
-          <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} item={itemModal} />
           {items.map((item, key) => (
             <button
               type="button"
               key={key.toString()}
               onClick={() => {
                 setItemModal(item);
-                setIsOpen(true);
+                setIsOpen('update');
               }}
             >
               <li>
